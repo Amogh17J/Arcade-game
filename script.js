@@ -1,6 +1,4 @@
-
-
-/* --- DATA (THE BANK) --- */
+ // DATA 
 const questionBank = [
     { question: "What is the capital of France?", answers: [{text: "Berlin", correct: false}, {text: "Madrid", correct: false}, {text: "Paris", correct: true}, {text: "Lisbon", correct: false}] },
     { question: "Who wrote 'Hamlet'?", answers: [{text: "Charles Dickens", correct: false}, {text: "William Shakespeare", correct: true}, {text: "J.K. Rowling", correct: false}, {text: "Mark Twain", correct: false}] },
@@ -59,10 +57,10 @@ const questionBank = [
     {question: "Which movie idea was originated from the writer seeing his cat movements?",answers: [{text: "Fast and Furious", correct: false},{text: "The Lion King", correct: false},{text: "Toy Story", correct: false},{text: "How to Train you Dragon", correct: true}]}
 ];
 
-/* --- ELEMENTS (SHARED) --- */
+// ELEMENT
 const galleryScreen = document.getElementById("gallery-screen");
 
-/* --- ELEMENTS (QUIZ) --- */
+// ELEMENTS for quiz
 const quizScreen = document.getElementById("quiz-screen");
 const startQuizCard = document.getElementById("start-quiz-card");
 const backHomeBtn = document.getElementById("back-home-btn");
@@ -74,7 +72,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let currentQuizQuestions = []; // Stores the 10 random questions for this round
 
-/* --- QUIZ NAVIGATION --- */
+// QUIZ NAVIGATION 
 if (startQuizCard) {
     startQuizCard.addEventListener("click", () => {
         galleryScreen.classList.add("hide");
@@ -88,7 +86,7 @@ backHomeBtn.addEventListener("click", () => {
     galleryScreen.classList.remove("hide");
 });
 
-/* --- QUIZ LOGIC --- */
+// QUIZ LOGIC 
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
@@ -97,7 +95,7 @@ function startQuiz(){
     // THE FIX: Randomize and Slice
     // 1. Shuffle the whole bank
     const shuffled = questionBank.sort(() => 0.5 - Math.random());
-    // 2. Pick the first 10
+    // 2. Pick the first 5
     currentQuizQuestions = shuffled.slice(0, 5);
     
     showQuestion();
@@ -171,7 +169,7 @@ nextButton.addEventListener("click", () => {
 });
 
 
-/* --- MEMORY GAME LOGIC --- */
+// MEMORY GAME (logic starts here)
 // Memory Elements
 const memoryScreen = document.getElementById("memory-screen");
 const startMemoryCard = document.getElementById("start-memory-card");
@@ -191,7 +189,7 @@ let time = 0;
 let timerInterval;
 let matchesFound = 0;
 
-// Memory Data (Icons)
+// Memory Data 
 const memoryItems = [
     { name: "pizza", icon: "🍕" },
     { name: "alien", icon: "👽" },
@@ -203,7 +201,7 @@ const memoryItems = [
     { name: "diamond", icon: "💎" },
 ];
 
-// 1. Navigation Event Listeners
+// Navigation Event Listeners
 if (startMemoryCard) {
     startMemoryCard.addEventListener("click", () => {
         galleryScreen.classList.add("hide");
@@ -224,7 +222,7 @@ if(memoryRestartBtn){
     memoryRestartBtn.addEventListener("click", initMemoryGame);
 }
 
-// 2. Initialize Game
+// Initialize Game
 function initMemoryGame() {
     // Reset State
     moves = 0;
@@ -271,7 +269,7 @@ function initMemoryGame() {
     });
 }
 
-// 3. Flip Logic
+// Flip Logic
 function flipCard() {
     if (lockBoard) return;
     if (this === firstCard) return; // Prevent double clicking same card
@@ -291,7 +289,7 @@ function flipCard() {
     checkForMatch();
 }
 
-// 4. Match Logic
+// Match Logic
 function checkForMatch() {
     let isMatch = firstCard.dataset.name === secondCard.dataset.name;
     isMatch ? disableCards() : unflipCards();
@@ -326,11 +324,12 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
 }
 
-// 5. Timer & Moves Helper
+// Timer & Moves Helper
 function incrementMoves() {
     moves++; 
     movesCount.innerText = moves;
 }
+// incrementing timer
 function startTimer() {
     timerInterval = setInterval(() => {
         time++;
