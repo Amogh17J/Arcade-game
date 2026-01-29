@@ -1,6 +1,5 @@
 # Arcade-game
 Term 2 -- EndTerm Project
-# Arcade Zone 🕹️
 
 **Live Demo:** [https://amogh17j.github.io/Arcade-game/](https://amogh17j.github.io/Arcade-game/)
 
