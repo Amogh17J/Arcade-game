@@ -1,0 +1,332 @@
+/* --- IMPORTS & VARIABLES --- */
+/* Using Fredoka for round friendliness, and VT323 for retro gaming vibes */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=VT323&display=swap');
+
+:root {
+    /* A softer, more curated palette */
+    --bg-color: #FFF2D5; /* Softer parchment yellow */
+    --card-bg: #ffffff;
+    --text-main: #2d2d2d; /* Soft black */
+    --text-muted: #666666;
+    --accent-blue: #5D9CEC;
+    --accent-green: #A0D468;
+    --accent-red: #ED5565;
+    --border-color: #333333;
+    
+    /* Shadows are now reserved for interactive elements only */
+    --shadow-hard: 4px 4px 0px 0px var(--border-color);
+    --shadow-soft: 2px 2px 0px 0px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    /* Subtler dot pattern for texture, less noisy */
+    background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-main);
+    padding: 20px;
+}
+
+/* --- UTILITY CLASSES --- */
+.hide {
+    display: none !important;
+}
+
+/* --- CONTAINER STYLES --- */
+.container, .app {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    background: var(--card-bg);
+    /* Cleaner borders, less heavy than before */
+    border: 2px solid var(--border-color);
+    /* Soft shadow for the main container so it doesn't float */
+    box-shadow: var(--shadow-soft);
+    border-radius: 12px; /* Slightly rounded corners feel friendlier */
+    padding: 40px;
+    animation: fadeIn 0.5s ease;
+    position: relative;
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--text-main);
+    /* REMOVED: The hard text shadow. Now it's clean. */
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-family: 'VT323', monospace; /* Retro font for flavor */
+    font-size: 1.4rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* --- GALLERY GRID --- */
+.gallery-grid {
+    display: flex; /* Switched to Flex for better centering of just 2 items */
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap; /* Wraps on mobile */
+}
+
+.game-card {
+    background: #fff;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 30px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    width: 220px; /* Fixed width prevents weird stretching */
+    text-align: center;
+}
+
+.game-card {
+    background: #fff;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    top: 0;
+}
+
+/* Only interactive elements get the pop-up shadow */
+.active-card {
+    box-shadow: var(--shadow-hard);
+    background: #fff;
+}
+
+/* Tactile click effect */
+.active-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px 0px var(--border-color);
+}
+
+.active-card:active {
+    transform: translate(0px, 0px);
+    box-shadow: var(--shadow-hard);
+}
+
+/* Subtle color hints */
+#start-quiz-card .icon { color: var(--accent-blue); }
+#start-memory-card .icon { color: var(--accent-green); }
+
+.locked {
+    background: #f4f4f4;
+    border: 2px dashed #ccc;
+    color: #999;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    /* REMOVED: drop-shadow filter on icons */
+}
+
+.game-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.game-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* --- QUIZ APP STYLES --- */
+.app h1 {
+    font-size: 2rem;
+    color: var(--text-main);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Retro Back Button */
+#back-home-btn, .back-btn {
+    position: absolute;
+    top: -55px;
+    left: 0;
+    background: var(--text-main);
+    color: #fff;
+    border: 2px solid var(--border-color);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 1.3rem;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: var(--shadow-hard);
+    transition: all 0.2s;
+}
+
+#back-home-btn:hover, .back-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--border-color);
+}
+
+.quiz h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+    color: var(--text-main);
+    text-align: left;
+}
+
+/* Quiz Buttons - Clean until hovered */
+.btn {
+    background: #fff;
+    color: var(--text-main);
+    font-weight: 500;
+    width: 100%;
+    border: 2px solid #e0e0e0; /* Softer default border */
+    padding: 15px 20px;
+    margin: 12px 0;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.1rem;
+}
+
+.btn:hover:not([disabled]) {
+    border-color: var(--border-color);
+    background: #f9f9f9;
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hard);
+}
+
+.correct {
+    background: var(--accent-green) !important;
+    color: #fff !important;
+    border-color: var(--border-color) !important;
+    font-weight: 600;
+}
+
+.incorrect {
+    background: var(--accent-red) !important;
+    color: #fff !important;
+    border-color: var(--border-color) !important;
+    font-weight: 600;
+}
+
+#next-btn, #memory-restart-btn {
+    background: var(--text-main);
+    color: #fff;
+    font-size: 1.3rem;
+    border: 2px solid var(--border-color);
+    padding: 12px 30px;
+    margin: 30px auto 0;
+    cursor: pointer;
+    box-shadow: var(--shadow-hard);
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+#next-btn:hover, #memory-restart-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--border-color);
+}
+
+/* --- MEMORY GAME STYLES --- */
+
+.memory-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.memory-stats b {
+    font-family: 'VT323', monospace;
+    color: var(--accent-blue);
+}
+
+.memory-game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+
+.memory-card {
+    height: 85px;
+    position: relative;
+    cursor: pointer;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform 0.4s, box-shadow 0.2s;
+    border-radius: 8px;
+    /* Subtle shadow for cards */
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.memory-card:active {
+    transform: scale(0.97);
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.front-face, .back-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    font-size: 2.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    background: #fff;
+}
+
+.front-face {
+    transform: rotateY(180deg);
+}
+
+/* A cleaner back face pattern */
+.back-face {
+    background: var(--accent-blue);
+    background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    color: white;
+    font-size: 2rem;
+    border: none; /* Removed border on back face for cleaner look */
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

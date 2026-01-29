@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Arcade</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    
+    <div class="container" id="gallery-screen">
+        <h1 class="main-title">Arcade Zone</h1>
+        <p class="subtitle">Choose your game to start</p>
+        
+        <div class="gallery-grid">
+            <div class="game-card active-card" id="start-quiz-card">
+                <div class="icon">🧠</div>
+                <h3>Brain Quiz</h3>
+                <p>Test your knowledge!</p>
+            </div>
+
+            <div class="game-card active-card" id="start-memory-card">
+                <div class="icon">🃏</div>
+                <h3>Memory Match</h3>
+                <p>Find the pairs!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="app hide" id="quiz-screen">
+        <button id="back-home-btn">← Back to Gallery</button>
+        <h1>Simple Quiz</h1>
+        <div class="quiz">
+            <h2 id="question">Question goes here</h2>
+            <div id="answer-buttons"></div>
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <div class="app hide" id="memory-screen">
+        <button id="memory-back-btn" class="back-btn">← Back to Gallery</button>
+        <h1>Memory Match</h1>
+        
+        <div class="memory-stats">
+            <span>Moves: <b id="moves-count">0</b></span>
+            <span>Time: <b id="time-count">0</b>s</span>
+        </div>
+        
+        <div class="memory-game-container" id="memory-board">
+            </div>
+        
+        <button id="memory-restart-btn">Restart Game</button>
+    </div>
+
+</body>
+</html>
