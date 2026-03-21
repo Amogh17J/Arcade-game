@@ -1,5 +1,5 @@
 # Arcade-game
-Term 2 -- EndTerm Project
+
 
 **Live Demo:** [https://amogh17j.github.io/Arcade-game/](https://amogh17j.github.io/Arcade-game/)
 
